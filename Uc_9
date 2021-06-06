@@ -1,0 +1,33 @@
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+interface Validate{
+	public abstract void email_Id();
+}
+
+public class Email {
+
+	public static Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) {
+		
+		Validate email = () -> {
+			
+			String emailRegex = "^[a-z]{2,20}[\\.[a-z 0-9 \\+]]+@[a-z]{3,9}[\\.[a-z]+]+";
+			
+			System.out.println("Enter your email:");
+			String email_Id = sc.next();
+			
+			Pattern pt = Pattern.compile(emailRegex);
+			
+			if (email_Id.matches(emailRegex)) {
+				
+				System.out.println("valid:");
+			} 
+			else {
+				System.out.println("not valid:");
+			}
+		};
+		email.email_Id();
+	}
+
+}
