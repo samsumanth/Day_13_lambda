@@ -1,0 +1,98 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.regex.Pattern;
+
+import org.junit.jupiter.api.Test;
+
+class Multiple_emailEntryTest {
+
+	@Test
+	void emailTest1() {
+		String email_Id = "abc.xyz@gmail.com";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("valid",result);
+	}
+	
+	@Test
+	public void emailTest2(){
+		String email_Id = "abc.xyz123@gmail.com";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("valid",result);
+	}
+	
+	@Test
+	public void emailTest3() {
+		String email_Id = "abc.xyz@gmail.co.in";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("valid",result);
+	}
+	
+	@Test
+	public void emailTest4() {
+		String email_Id = "abc.xyz@yahoo.co.in";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("valid",result);
+	}
+	
+	@Test
+	public void emailTest5() {
+		String email_Id = "abc.xyz123@gmail.co.in";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("valid",result);
+	}
+	
+	@Test
+	public void emailTest6() {
+		String email_Id = "Abc.xyz@gmail.com";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("not valid",result);
+	}
+	
+	@Test
+	public void emailTest7() {
+		String email_Id = "abc.xyz@123gmail.com";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("not valid",result);
+	}
+	
+	@Test
+	public void emailTest8() {
+		String email_Id = "abc.xyz123#gmail.com";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("not valid",result);
+	}
+	
+	@Test
+	public void emailTest9() {
+		String email_Id = "abc.xyz123$gmail.com";
+		String result = email_id.email_Id(email_Id);
+		
+		assertEquals("not valid",result);
+	}
+	
+	I_Validate email_id = (email) -> {
+		String emailRegex = "^[a-z]{2,20}[\\.[a-z 0-9 \\+]]+@[a-z]{3,9}[\\.[a-z]+]+";
+					
+		Pattern pt = Pattern.compile(emailRegex);
+		
+		if (email.matches(emailRegex)) {
+			
+			System.out.println("valid:");
+			return "valid";
+		} 
+		else {
+			
+			System.out.println("not valid:");
+			return "not valid";
+		}
+	};
+
+}
