@@ -1,0 +1,37 @@
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+interface I_Validate{
+	public abstract String email_Id(String email);
+}
+public class Multiple_emailEntry {
+
+	public static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		
+		System.out.println("Enter your email:");
+		String email_Id = sc.next();
+
+		I_Validate email_id = (email) -> {
+			String emailRegex = "^[a-z]{2,20}[\\.[a-z 0-9 \\+]]+@[a-z]{3,9}[\\.[a-z]+]+";
+						
+			Pattern pt = Pattern.compile(emailRegex);
+			
+			if (email.matches(emailRegex)) {
+				
+				System.out.println("valid:");
+				return "valid";
+			} 
+			else {
+				
+				System.out.println("not valid:");
+				return "not valid";
+			}
+		};
+		
+		email_id.email_Id(email_Id);
+
+	}
+
+}
