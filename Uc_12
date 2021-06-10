@@ -1,0 +1,169 @@
+import java.util.regex.Pattern;
+import java.util.Scanner;
+
+class myException extends Exception {
+	myException(String message)
+	{
+		super(message);
+	}
+}
+interface Fname {
+	public String validate_Fname(String fName) ;
+}
+
+interface Lname {
+	public abstract String validate_LastName(String lName);
+}
+
+interface Email {
+	public abstract String Validate_emailId(String email);
+}
+
+interface Contact {	
+	public abstract String Validate_phoneNumber(String contact);
+}
+
+interface Password {
+	public abstract String Validate_password(String password);
+}
+
+public class Custom_Exception {
+	
+	public static Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) {
+		
+		System.out.println("Enter your name:");
+		String fname = sc.next();
+		
+		Fname myLamda = (fName) -> {
+			String FnameRegex = "^[^0-9][a-zA-Z]{2,20}$";
+			
+			Pattern pt = Pattern.compile(FnameRegex);
+			
+			if (fName.matches(FnameRegex)) {
+				System.out.println("valid name:");
+				return "valid";
+			} 
+			else {
+				try {
+					throw new myException("invalid name");
+				}
+				catch(myException m) {
+					System.out.println(m);
+					return "invalid name";
+				}
+			}
+		};
+		
+		String result = myLamda.validate_Fname(fname);
+		
+		System.out.println("Enter last name:");
+		String lastName = sc.next();
+
+		Lname lastname = (lName) -> {
+			
+			String lastName_Regex = "^[^0-9][a-zA-Z]{3,20}$";
+				
+			Pattern pt = Pattern.compile(lastName_Regex);
+			
+			if (lName.matches(lastName_Regex)) {
+				
+				System.out.println("valid:");
+				return "valid";
+			} 
+			else {
+			
+				try {
+					throw new myException("invalid name");
+				}
+				catch(myException m) {
+					System.out.println(m);
+					return "invalid name";
+				}			
+			}
+		};
+		result = lastname.validate_LastName(lastName);
+
+		System.out.println("Enter your email:");
+		String emailid = sc.next();
+
+		Email email_id = (email) -> {
+			
+			String emailRegex = "  ^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$";
+						
+			Pattern pt = Pattern.compile(emailRegex);
+			
+			if (email.matches(emailRegex)) {
+				
+				System.out.println("valid:");
+				return "valid";
+			} 
+			else {
+				
+				try {
+					throw new myException("invalid email");
+				}
+				catch(myException m) {
+					System.out.println(m);
+					return "invalid email";
+				}
+			}
+		};
+		email_id.Validate_emailId(emailid);
+		
+		System.out.println("Enter contact number:");
+		String contactnum = "91 6300652850";
+
+		Contact phone = (contact) -> {
+			
+			String indianContactNum_Regex = "^91\\s[6-9]{1}[0-9]{9}$";
+			
+			Pattern pt = Pattern.compile(indianContactNum_Regex);
+			
+			if (contact.matches(indianContactNum_Regex)) {
+				
+				System.out.println("valid:");
+				return "valid";
+			} 
+			else {
+				try {
+					throw new myException("invalid contact");
+				}
+				catch(myException m) {
+					System.out.println(m);
+					return "invalid contact";
+				}			
+			}
+		};
+		
+		phone.Validate_phoneNumber(contactnum);
+		
+		System.out.println("Enter password:");
+		String userpassword = sc.next();
+	
+		Password pass = (password) -> {
+			
+			String passwordRegex = "^[A-z]{1}[a-z]{4,20}[\\D[0-9]]{2,9}$";
+				
+			Pattern pt = Pattern.compile(passwordRegex);
+			
+			if (password.matches(passwordRegex)) {
+				System.out.println("valid:");
+				return "valid";
+			} 
+			else {
+				try {
+					throw new myException("invalid password");
+				}
+				catch(myException m) {
+					System.out.println(m);
+					return "invalid password";
+				}			
+			}
+		};
+		pass.Validate_password(userpassword);
+
+
+	}
+
+}
